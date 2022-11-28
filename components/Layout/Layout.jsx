@@ -20,7 +20,7 @@ const inter = Raleway({
 const Layout = ({ children }) => {
   return (
     <div
-      className={`${inter.variable} flex min-h-screen flex-col justify-between bg-gray-50 font-sans`}
+      className={`${inter.variable} flex min-h-screen flex-col justify-between overflow-x-hidden bg-gray-50 font-sans`}
     >
       <Header />
 

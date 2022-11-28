@@ -4,11 +4,36 @@ import { useRouter } from "next/router";
 import { Bars3Icon, MoonIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "next-i18next";
 import ScrollIndicator from "components/ScrollIndicator.jsx/ScrollIndicator";
+import { useState } from "react";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
+
+const itemVariants = {
+  closed: {
+    opacity: 0,
+  },
+  open: { opacity: 1 },
+};
+
+const sideVariants = {
+  closed: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: 1,
+    },
+  },
+};
 
 const Header = () => {
   const router = useRouter();
   const path = router.asPath;
   const { t } = useTranslation("header");
+  const [open, cycleOpen] = useCycle(false, true);
 
   const links = [
     {
@@ -80,16 +105,90 @@ const Header = () => {
           </Button>
         </div>
       </div>
-      <div className="flex items-center justify-between border-b py-8 lg:hidden">
+      <div className="flex items-center justify-between py-8 lg:hidden">
         <img src="/Logo_10.svg" width="60px" height="40px" alt="" />
         <div className="flex space-x-4">
-          <Button href="/second-page" as="link" size="xl" style="secondary">
-            <MoonIcon className="h-6 w-6 text-black" />
-          </Button>
-          <Button style="primary" size="lg">
+          <Button style="primary" size="lg" onClick={cycleOpen}>
             <Bars3Icon className="h-6 w-6 text-black" />
           </Button>
         </div>
+        <AnimatePresence>
+          {open && (
+            <>
+              <div className="absolute top-0 left-0 h-screen w-full bg-black/30"></div>
+              <motion.aside
+                className="absolute left-0 top-0 z-50 h-screen w-1/2 bg-gray-50 shadow"
+                initial={{ width: 0 }}
+                animate={{
+                  width: 300,
+                }}
+                exit={{
+                  width: 0,
+                  transition: { delay: 0.7, duration: 0.3 },
+                }}
+              >
+                <motion.div
+                  className="flex h-full flex-col justify-between px-12 py-8"
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  variants={sideVariants}
+                >
+                  <div>
+                    <motion.div
+                      className="mb-12 text-black"
+                      whileHover={{ scale: 1.1 }}
+                      variants={itemVariants}
+                    >
+                      <img
+                        src="/Logo_10.svg"
+                        width="60px"
+                        height="40px"
+                        alt=""
+                      />
+                    </motion.div>
+                    <div className="flex flex-col space-y-4">
+                      {links.map(({ name, href, id }) => (
+                        <motion.a
+                          className="block text-gray-600"
+                          key={href}
+                          href={href}
+                          whileHover={{ scale: 1.1 }}
+                          variants={itemVariants}
+                        >
+                          {name}
+                        </motion.a>
+                      ))}
+                    </div>
+                  </div>
+                  <motion.div
+                    className="flex flex-col space-y-8"
+                    whileHover={{ scale: 1.1 }}
+                    variants={itemVariants}
+                  >
+                    <Button
+                      href="/second-page"
+                      as="link"
+                      size="xl"
+                      style="secondary"
+                    >
+                      <MoonIcon className="h-6 w-6 text-black" />
+                    </Button>
+                    <Button
+                      as="link"
+                      size="xl"
+                      style="primary"
+                      href={path}
+                      locale={router.locale == "cs" ? "en" : "cs"}
+                    >
+                      {router.locale == "cs" ? "EN" : "CS"}
+                    </Button>
+                  </motion.div>
+                </motion.div>
+              </motion.aside>
+            </>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
