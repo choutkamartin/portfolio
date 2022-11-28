@@ -3,7 +3,6 @@ import { appWithTranslation } from "next-i18next";
 import { ThemeProvider } from "next-themes";
 import { Fragment } from "react";
 import { AnimatePresence } from "framer-motion";
-import "styles/transition.css";
 
 function MyApp({ Component, pageProps, router }) {
   const getLayout = Component.getLayout ?? ((page) => page);
