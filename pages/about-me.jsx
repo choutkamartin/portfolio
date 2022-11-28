@@ -5,7 +5,7 @@ import Image from "next/image";
 import { getClient } from "lib/sanity.server";
 import { aboutQuery } from "lib/queries";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import useTranslation from "utils/useTranslation";
 import { getLocalizedText } from "utils/helpers";
 import { Timeline } from "components/Timeline";
 import { imageBuilder, urlForImage } from "lib/sanity";
@@ -13,7 +13,7 @@ import { imageBuilder, urlForImage } from "lib/sanity";
 const Page = ({ data }) => {
   const { education, work, model } = data;
   const { t } = useTranslation("about");
-  console.log(model);
+  
   return (
     <>
       <div className="flex flex-wrap items-center gap-8 pb-36 sm:flex-nowrap lg:gap-32">
@@ -80,36 +80,6 @@ const Page = ({ data }) => {
             );
           })}
         </Timeline>
-      </div>
-      <hr />
-      <div className="py-32">
-        <h2 className="mb-8 text-4xl font-bold">CAD modely</h2>
-        <p className="my-8 text-lg text-gray-600">
-          Strojírenské součásti a jejich modely které jsem vytvořil při studiu
-          na střední školy. Všechny obrázky odkazují na web GrabCAD, odkud se
-          dají modely stáhnout.
-        </p>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {model.map((item) => (
-            <div key={item._id}>
-              <div className="group relative mb-4 h-64 w-full cursor-pointer">
-                <Image
-                  src={urlForImage(item.render)}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute bottom-0 h-0 w-full overflow-hidden bg-sky-400 bg-opacity-50 backdrop-blur-lg transition-all group-hover:h-full">
-                  <div className="p-6">
-                    <p className="mb-4 text-2xl font-bold">{item.title}</p>
-                    <p className="text-gray-600">
-                      {getLocalizedText(item.description)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </>
   );

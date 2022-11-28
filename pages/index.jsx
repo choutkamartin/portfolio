@@ -5,12 +5,38 @@ import Image from "next/image";
 import { getClient } from "lib/sanity.server";
 import { indexQuery } from "lib/queries";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
-import { getLocalizedText } from "utils/helpers";
+import useTranslation from "utils/useTranslation";
+import { getLocalizedText, joinClassNames } from "utils/helpers";
+import { Tab } from "components/Tab";
+import { useState } from "react";
+import { Project } from "components/Project";
+import { motion } from "framer-motion";
+import NextLink from "next/link";
+import { Post } from "components/Post";
+
+const tabs = [
+  {
+    name: "Webové stránky",
+    value: "website",
+  },
+  {
+    name: "Aplikace",
+    value: "application",
+  },
+  {
+    name: "Překlady",
+    value: "translation",
+  },
+  {
+    name: "Open-source",
+    value: "open-source",
+  },
+];
 
 const Page = ({ data }) => {
   const { posts, projects } = data;
   const { t } = useTranslation("index");
+  const [type, setType] = useState(tabs[0].value);
 
   return (
     <>
@@ -27,7 +53,7 @@ const Page = ({ data }) => {
           <div className="mt-8 flex flex-wrap gap-4">
             <Button
               as="link"
-              href="/second-page"
+              href="/about-me"
               size="xl"
               style="primary"
               className="mt-2"
@@ -36,7 +62,7 @@ const Page = ({ data }) => {
             </Button>
             <Button
               as="link"
-              href="/second-page"
+              href="/realize"
               size="xl"
               style="secondary"
               className="mt-2"
@@ -46,12 +72,8 @@ const Page = ({ data }) => {
           </div>
         </div>
         <div className="relative sm:-translate-x-1/4 sm:pl-4">
-          <div className="relative h-40 w-40 shrink-0 rounded-full">
-            <Image
-              src="/avatar.jpeg"
-              fill
-              className="rounded-full object-cover"
-            />
+          <div className="relative h-40 w-40 shrink-0 overflow-hidden rounded-full shadow-2xl">
+            <Image src="/avatar.jpeg" fill className="object-cover" />
             {/* <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 border-2 border-gray-600">
               <div className="absolute h-0.5 w-20 origin-top-left -translate-x-0.5 -rotate-90 bg-gray-600"></div>
             </div> */}
@@ -61,40 +83,47 @@ const Page = ({ data }) => {
       </div>
       <hr />
       <div className="py-16">
-        <h2 className="text-4xl font-bold">{t("projects")}</h2>
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {projects.map((item) => (
-            <div
-              className="relative w-full border-4 border-black p-8"
-              key={item._id}
+        <h2 className="mb-4 text-4xl font-bold">{t("projects")}</h2>
+        <div className="flex space-x-2">
+          {tabs.map((item, index) => (
+            <button
+              className={joinClassNames(
+                "group relative w-full overflow-hidden border-2 border-black px-4 py-3 text-gray-800 transition-colors"
+              )}
+              onClick={() => setType(item.value)}
+              key={index}
             >
-              <h3 className="text-3xl font-bold">{item.title}</h3>
-              <p className="mt-2 text-gray-600">{item.date}</p>
-              <p className="my-2 text-gray-600">
-                {getLocalizedText(item.description)}
-              </p>
-              <div className="absolute -left-4 -top-4 -z-10 h-full w-full bg-sky-100"></div>
-            </div>
+              {item.name}
+              <div
+                className={joinClassNames(
+                  "absolute inset-0 -z-10 h-full w-full bg-blue-100  transition-all group-hover:bg-sky-100",
+                  item.value === type ? "top-0" : "top-full"
+                )}
+              ></div>
+            </button>
           ))}
         </div>
+        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+          {projects
+            .filter((item) => item.type === type)
+            .map((item, index) => (
+              <Project data={item} key={index} />
+            ))}
+        </div>
       </div>
-      <div className="pt-16">
+      <motion.div
+        className="pt-16"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
         <h2 className="text-4xl font-bold">{t("posts")}</h2>
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {posts.map((item) => (
-            <div
-              className="relative w-full border-4 border-black p-8"
-              key={item._id}
-            >
-              <h3 className="text-3xl font-bold">
-                {getLocalizedText(item.title)}
-              </h3>
-              <p className="mt-2 text-gray-600">{item.date}</p>
-              <div className="absolute -left-4 -top-4 -z-10 h-full w-full bg-blue-100"></div>
-            </div>
+          {posts.map((item, index) => (
+            <Post data={item} key={index} />
           ))}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

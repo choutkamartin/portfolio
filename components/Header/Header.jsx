@@ -3,6 +3,7 @@ import { Button } from "components/Button";
 import { useRouter } from "next/router";
 import { Bars3Icon, MoonIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "next-i18next";
+import ScrollIndicator from "components/ScrollIndicator.jsx/ScrollIndicator";
 
 const Header = () => {
   const router = useRouter();
@@ -26,15 +27,21 @@ const Header = () => {
       allowed: true,
     },
     {
-      name: t("uses-snippets"),
+      name: "Fotogalerie / Snippety",
       href: "/not-found",
+      allowed: true,
+    },
+    {
+      name: t("cad-models"),
+      href: "/cad-models",
       allowed: true,
     },
   ];
 
   return (
-    <header className="px-8 lg:px-0">
-      <div className="mx-auto hidden max-w-4xl flex-col flex-wrap justify-between gap-8 border-b border-gray-300 py-8 lg:flex lg:flex-row lg:items-center">
+    <header className="sticky top-0 z-50 px-8 backdrop-blur-xl lg:px-0">
+      <ScrollIndicator />
+      <div className="mx-auto hidden max-w-4xl flex-col flex-wrap justify-between gap-8 border-gray-300 py-8 lg:flex lg:flex-row lg:items-center">
         <div className="flex items-center space-x-16">
           <div className="text-black">
             <img src="/Logo_10.svg" width="60px" height="40px" alt="" />

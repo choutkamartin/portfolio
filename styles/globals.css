@@ -77,7 +77,7 @@
     transform: translateX(-6px);
   }
 
-  ul li::before {
+  ul.list-decorator li::before {
     content: "";
     border-style: solid;
     margin-right: 1rem;
@@ -88,4 +88,14 @@
     position: relative;
   }
   /* End of Slide Button  */
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: red;
+  transform-origin: 0%;
 }

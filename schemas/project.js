@@ -1,7 +1,7 @@
-import { BookIcon } from '@sanity/icons';
-import { defineType } from 'sanity';
+import { BookIcon } from "@sanity/icons";
+import { defineType } from "sanity";
 
-import authorType from './author';
+import authorType from "./author";
 
 /**
  * This file is the schema definition for a post.
@@ -16,80 +16,94 @@ import authorType from './author';
  */
 
 export default defineType({
-  name: 'project',
-  title: 'Project',
+  name: "project",
+  title: "Project",
   icon: BookIcon,
-  type: 'document',
+  type: "document",
   fields: [
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      validation: (Rule) => Rule.required()
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
-      name: 'description',
-      title: 'Description',
-      type: 'object',
+      name: "description",
+      title: "Description",
+      type: "object",
       fields: [
         {
-          title: 'Czech',
-          name: 'cs',
-          type: 'string'
+          title: "Czech",
+          name: "cs",
+          type: "string",
         },
         {
-          title: 'English',
-          name: 'en',
-          type: 'string'
-        }
+          title: "English",
+          name: "en",
+          type: "string",
+        },
       ],
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
+      name: "slug",
+      title: "Slug",
+      type: "slug",
       options: {
-        source: 'title',
-        maxLength: 96
+        source: "title",
+        maxLength: 96,
       },
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
-      name: 'website',
-      title: 'Website',
-      type: 'url',
-      validation: (Rule) => Rule.required()
-    },
-    {
-      name: 'content',
-      title: 'Content',
-      type: 'array',
-      of: [{ type: 'block' }]
-    },
-    {
-      name: 'logo',
-      title: 'Logo',
-      type: 'image',
+      title: "Type",
+      name: "type",
+      type: "string",
       options: {
-        hotspot: true
-      }
+        list: [
+          { title: "Website", value: "website" },
+          { title: "Application", value: "application" },
+          { title: "Translation", value: "translation" },
+          { title: "Open Source", value: "open-source" },
+        ],
+        layout: "radio", // <-- defaults to 'dropdown'
+      },
     },
     {
-      name: 'date',
-      title: 'Date',
-      type: 'date'
-    }
+      name: "website",
+      title: "Website",
+      type: "url",
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "content",
+      title: "Content",
+      type: "array",
+      of: [{ type: "block" }],
+    },
+    {
+      name: "logo",
+      title: "Logo",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: "date",
+      title: "Date",
+      type: "date",
+    },
   ],
   preview: {
     select: {
-      title: 'title',
-      author: 'author.name',
-      media: 'coverImage'
+      title: "title",
+      author: "author.name",
+      media: "coverImage",
     },
     prepare(selection) {
       const { author } = selection;
       return { ...selection, subtitle: author && `by ${author}` };
-    }
-  }
+    },
+  },
 });

@@ -1,4 +1,5 @@
 import { Link } from "components/Link";
+import { Spotify } from "components/Spotify";
 import { useTranslation } from "next-i18next";
 
 const Footer = () => {
@@ -38,6 +39,7 @@ const Footer = () => {
         <div className="mx-auto mb-8 max-w-4xl text-gray-400">
           PG x INDYWICH x TNKLBL x H16
         </div>
+        <Spotify />
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
           {links.map((item, index) => {
             return (
@@ -45,7 +47,7 @@ const Footer = () => {
                 <h2 className="text-xl font-bold uppercase tracking-widest text-black">
                   {item.name}
                 </h2>
-                <ul className="flex flex-col space-y-4">
+                <ul className="list-decorator flex flex-col space-y-4">
                   {item.children.map((child, index) => {
                     if (child.allowed) {
                       return (
