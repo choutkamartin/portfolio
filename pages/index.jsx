@@ -84,7 +84,7 @@ const Page = ({ data }) => {
       <hr />
       <div className="py-16">
         <h2 className="mb-4 text-4xl font-bold">{t("projects")}</h2>
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap sm:flex-nowrap gap-2">
           {tabs.map((item, index) => (
             <button
               className={joinClassNames(

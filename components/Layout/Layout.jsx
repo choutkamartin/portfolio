@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
     >
       <Header />
 
-      <main className="z-10 mx-auto w-full max-w-4xl py-36 px-4">
+      <main className="z-10 mx-auto w-full max-w-4xl py-10 lg:py-36 px-4">
         <TransitionEffect1>{children}</TransitionEffect1>
       </main>
 

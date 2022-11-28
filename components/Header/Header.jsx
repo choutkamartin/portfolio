@@ -3,6 +3,7 @@ import { Button } from "components/Button";
 import { useRouter } from "next/router";
 import { Bars3Icon, MoonIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "next-i18next";
+import NextLink from "next/link";
 import ScrollIndicator from "components/ScrollIndicator.jsx/ScrollIndicator";
 import { useState } from "react";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
@@ -69,9 +70,9 @@ const Header = () => {
         <ScrollIndicator />
         <div className="mx-auto hidden max-w-4xl flex-col flex-wrap justify-between gap-8 border-gray-300 py-8 lg:flex lg:flex-row lg:items-center">
           <div className="flex items-center space-x-16">
-            <div className="text-black">
+            <NextLink href="/" className="block text-black">
               <img src="/Logo_10.svg" width="60px" height="40px" alt="" />
-            </div>
+            </NextLink>
             <nav className="flex flex-col gap-4 lg:flex-row">
               {links.map((item, index) => {
                 if (item.allowed) {
@@ -153,16 +154,16 @@ const Header = () => {
                     <img src="/Logo_10.svg" width="60px" height="40px" alt="" />
                   </motion.div>
                   <div className="flex flex-col space-y-4">
-                    {links.map(({ name, href, id }) => (
+                    {links.map((item, index) => (
                       <motion.div
                         className="block"
-                        key={href}
+                        key={index}
                         whileHover={{ scale: 1.1 }}
                         variants={itemVariants}
                         onClick={cycleOpen}
                       >
-                        <Link href={href} as="link">
-                          {name}
+                        <Link href={item.href} as="link">
+                          {item.name}
                         </Link>
                       </motion.div>
                     ))}
