@@ -115,7 +115,12 @@ const Header = () => {
         <AnimatePresence>
           {open && (
             <>
-              <div className="absolute top-0 left-0 h-screen w-full bg-black/30"></div>
+              <motion.div
+                className="absolute top-0 left-0 h-screen w-full bg-black/30"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              ></motion.div>
               <motion.aside
                 className="absolute left-0 top-0 z-50 h-screen w-1/2 bg-gray-50 shadow"
                 initial={{ width: 0 }}
@@ -149,15 +154,17 @@ const Header = () => {
                     </motion.div>
                     <div className="flex flex-col space-y-4">
                       {links.map(({ name, href, id }) => (
-                        <motion.a
-                          className="block text-gray-600"
+                        <motion.div
+                          className="block"
                           key={href}
-                          href={href}
                           whileHover={{ scale: 1.1 }}
                           variants={itemVariants}
+                          onClick={cycleOpen}
                         >
-                          {name}
-                        </motion.a>
+                          <Link href={href} as="link">
+                            {name}
+                          </Link>
+                        </motion.div>
                       ))}
                     </div>
                   </div>
