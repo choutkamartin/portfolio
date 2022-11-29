@@ -6,25 +6,18 @@ import { Footer } from "components/Footer";
 import TransitionEffect1 from "components/Transition";
 
 // Import Inter font from Google Fonts
-import { Raleway } from "@next/font/google";
 import ScrollIndicator from "components/ScrollIndicator.jsx/ScrollIndicator";
 
 // This is what you need to do to use imported Inter font
 // Keep in mind this font is a variable one
 // For correct functionality you then have to use it's classname inside body className
-const inter = Raleway({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-inter",
-});
 
 const Layout = ({ children }) => {
   return (
-    <div
-      className={`${inter.variable} flex min-h-screen flex-col justify-between overflow-x-hidden bg-gray-50 font-sans`}
-    >
+    <div className="flex min-h-screen flex-col justify-between overflow-x-hidden bg-gray-50">
       <Header />
 
-      <main className="z-10 mx-auto w-full max-w-4xl py-10 lg:py-36 px-4">
+      <main className="z-10 mx-auto w-full max-w-4xl py-10 px-4  lg:px-0 lg:py-20">
         <TransitionEffect1>{children}</TransitionEffect1>
       </main>
 

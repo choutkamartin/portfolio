@@ -53,11 +53,6 @@ const Header = () => {
       allowed: true,
     },
     {
-      name: "Fotogalerie / Snippety",
-      href: "/not-found",
-      allowed: true,
-    },
-    {
       name: t("cad-models"),
       href: "/cad-models",
       allowed: true,
@@ -83,7 +78,7 @@ const Header = () => {
                       as="link"
                       active={item.href === path ? true : false}
                       key={index}
-                      className="font-medium"
+                      className="font-medium text-lg"
                     >
                       {item.name}
                     </Link>

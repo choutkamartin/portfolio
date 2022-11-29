@@ -13,30 +13,12 @@ import { Project } from "components/Project";
 import { motion } from "framer-motion";
 import NextLink from "next/link";
 import { Post } from "components/Post";
-
-const tabs = [
-  {
-    name: "Webové stránky",
-    value: "website",
-  },
-  {
-    name: "Aplikace",
-    value: "application",
-  },
-  {
-    name: "Překlady",
-    value: "translation",
-  },
-  {
-    name: "Open-source",
-    value: "open-source",
-  },
-];
+import { Projects } from "components/Projects";
+import { Posts } from "components/Posts";
 
 const Page = ({ data }) => {
   const { posts, projects } = data;
   const { t } = useTranslation("index");
-  const [type, setType] = useState(tabs[0].value);
 
   return (
     <>
@@ -84,32 +66,7 @@ const Page = ({ data }) => {
       <hr />
       <div className="py-16">
         <h2 className="mb-4 text-4xl font-bold">{t("projects")}</h2>
-        <div className="flex flex-wrap sm:flex-nowrap gap-2">
-          {tabs.map((item, index) => (
-            <button
-              className={joinClassNames(
-                "group relative w-full overflow-hidden border-2 border-black px-4 py-3 text-gray-800 transition-colors"
-              )}
-              onClick={() => setType(item.value)}
-              key={index}
-            >
-              {item.name}
-              <div
-                className={joinClassNames(
-                  "absolute inset-0 -z-10 h-full w-full bg-blue-100  transition-all group-hover:bg-sky-100",
-                  item.value === type ? "top-0" : "top-full"
-                )}
-              ></div>
-            </button>
-          ))}
-        </div>
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {projects
-            .filter((item) => item.type === type)
-            .map((item, index) => (
-              <Project data={item} key={index} />
-            ))}
-        </div>
+        <Projects data={projects} />
       </div>
       <motion.div
         className="pt-16"
@@ -118,11 +75,7 @@ const Page = ({ data }) => {
         viewport={{ once: true }}
       >
         <h2 className="text-4xl font-bold">{t("posts")}</h2>
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {posts.map((item, index) => (
-            <Post data={item} key={index} />
-          ))}
-        </div>
+        <Posts data={posts} />
       </motion.div>
     </>
   );

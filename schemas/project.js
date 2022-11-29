@@ -1,4 +1,4 @@
-import { BookIcon } from "@sanity/icons";
+import { BookIcon, ImageIcon } from "@sanity/icons";
 import { defineType } from "sanity";
 
 import authorType from "./author";
@@ -78,8 +78,63 @@ export default defineType({
     {
       name: "content",
       title: "Content",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "object",
+      fields: [
+        {
+          title: "Czech",
+          name: "cs",
+          type: "array",
+          of: [
+            {
+              type: "block",
+              marks: {
+                annotations: [
+                  {
+                    name: "button",
+                    type: "object",
+                    title: "Button",
+                    fields: [
+                      {
+                        name: "url",
+                        type: "url",
+                        title: "URL",
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+            { type: "image", icon: ImageIcon },
+          ],
+        },
+        {
+          title: "English",
+          name: "en",
+          type: "array",
+          of: [
+            {
+              type: "block",
+              marks: {
+                annotations: [
+                  {
+                    name: "button",
+                    type: "object",
+                    title: "Button",
+                    fields: [
+                      {
+                        name: "url",
+                        type: "url",
+                        title: "URL",
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+            { type: "image", icon: ImageIcon },
+          ],
+        },
+      ],
     },
     {
       name: "logo",
@@ -92,7 +147,7 @@ export default defineType({
     {
       name: "date",
       title: "Date",
-      type: "date",
+      type: "string",
     },
   ],
   preview: {

@@ -6,9 +6,13 @@ export const joinClassNames = (...classes) => {
 
 export const getLocalizedText = (obj) => {
   const router = useRouter();
-  if (router.locale === "cs") {
-    return obj.cs;
+  if (obj != undefined) {
+    if (router.locale === "cs") {
+      return obj.cs != undefined ? obj.cs : null;
+    } else {
+      return obj.en != undefined ? obj.en : null;
+    }
   } else {
-    return obj.en;
+    return "";
   }
 };

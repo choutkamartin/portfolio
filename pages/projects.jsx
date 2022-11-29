@@ -5,9 +5,9 @@ import Image from "next/image";
 import { getClient } from "lib/sanity.server";
 import { indexQuery } from "lib/queries";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 import { getLocalizedText } from "utils/helpers";
-import { Project } from "components/Project";
+import { Projects } from "components/Projects";
+import useTranslation from "utils/useTranslation";
 
 const Page = ({ data }) => {
   const { posts, projects } = data;
@@ -15,14 +15,8 @@ const Page = ({ data }) => {
 
   return (
     <>
-      <div className="py-16">
-        <h2 className="text-4xl font-bold">{t("projects")}</h2>
-        <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {projects.map((item) => (
-            <Project data={item} key={item._id} />
-          ))}
-        </div>
-      </div>
+      <h2 className="mb-4 text-4xl font-bold">{t("projects")}</h2>
+      <Projects data={projects} />
     </>
   );
 };

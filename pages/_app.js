@@ -4,6 +4,13 @@ import { ThemeProvider } from "next-themes";
 import { Fragment } from "react";
 import { AnimatePresence } from "framer-motion";
 
+import { Raleway } from "@next/font/google";
+
+const inter = Raleway({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-inter",
+});
+
 function MyApp({ Component, pageProps, router }) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const Layout = Component.layout ?? Fragment;
@@ -12,15 +19,17 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <ThemeProvider attribute="class">
-      {Component.layout ? (
-        getLayout(
-          <Layout border={border} banner={banner}>
-            <Component {...pageProps} canonical={url} key={url} />
-          </Layout>
-        )
-      ) : (
-        <Component {...pageProps} />
-      )}
+      <div className={`${inter.variable} font-sans`}>
+        {Component.layout ? (
+          getLayout(
+            <Layout border={border} banner={banner}>
+              <Component {...pageProps} canonical={url} key={url} />
+            </Layout>
+          )
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </div>
     </ThemeProvider>
   );
 }
