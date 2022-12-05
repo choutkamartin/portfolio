@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps, router }) {
   const url = `https://wallis.dev${router.route}`;
 
   return (
-    <ThemeProvider attribute="class">
+    <ThemeProvider enableSystem={true} attribute="class">
       <div className={`${inter.variable} font-sans`}>
         {Component.layout ? (
           getLayout(

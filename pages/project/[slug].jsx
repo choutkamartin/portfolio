@@ -23,13 +23,14 @@ const Page = (props) => {
     enabled: preview && !!slug,
   });
   const { project, moreProjects } = data || {};
-  console.log(project);
   return router.isFallback ? (
     <>Test</>
   ) : (
     <>
-      <h1 className="mb-4 text-6xl font-bold">{project.title}</h1>
-      <div className="prose">
+      <h1 className="mb-4 inline-block border-b-8 border-sky-400 text-6xl font-bold">
+        {project.title}
+      </h1>
+      <div className="prose text-gray-800 dark:text-gray-200">
         <RenderRichText data={getLocalizedText(project.content)} />
       </div>
     </>

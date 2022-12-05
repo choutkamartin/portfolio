@@ -1,12 +1,14 @@
 import { Link } from "components/Link";
 import { Button } from "components/Button";
 import { useRouter } from "next/router";
-import { Bars3Icon, MoonIcon } from "@heroicons/react/24/solid";
+import { Bars3Icon, MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "next-i18next";
 import NextLink from "next/link";
 import ScrollIndicator from "components/ScrollIndicator.jsx/ScrollIndicator";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
+import { useTheme } from "next-themes";
+import Image from "next/image";
 
 const itemVariants = {
   closed: {
@@ -35,6 +37,14 @@ const Header = () => {
   const path = router.asPath;
   const { t } = useTranslation("header");
   const [open, cycleOpen] = useCycle(false, true);
+  const { systemTheme, theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const links = [
     {
@@ -66,7 +76,16 @@ const Header = () => {
         <div className="mx-auto hidden max-w-4xl flex-col flex-wrap justify-between gap-8 border-gray-300 py-8 lg:flex lg:flex-row lg:items-center">
           <div className="flex items-center space-x-16">
             <NextLink href="/" className="block text-black">
-              <img src="/Logo_10.svg" width="60px" height="40px" alt="" />
+              <Image
+                src={
+                  mounted === true && currentTheme === "dark"
+                    ? "/logo-dark.svg"
+                    : "/logo-light.svg"
+                }
+                width={60}
+                height={40}
+                alt="Logo"
+              />
             </NextLink>
             <nav className="flex flex-col gap-4 lg:flex-row">
               {links.map((item, index) => {
@@ -78,7 +97,7 @@ const Header = () => {
                       as="link"
                       active={item.href === path ? true : false}
                       key={index}
-                      className="font-medium text-lg"
+                      className="text-lg font-medium"
                     >
                       {item.name}
                     </Link>
@@ -97,8 +116,19 @@ const Header = () => {
             >
               {router.locale == "cs" ? "EN" : "CS"}
             </Button>
-            <Button href="/second-page" as="link" size="xl" style="secondary">
-              <MoonIcon className="h-6 w-6 text-black" />
+            <Button
+              as="button"
+              size="xl"
+              style="secondary"
+              onClick={() =>
+                currentTheme === "dark" ? setTheme("light") : setTheme("dark")
+              }
+            >
+              {currentTheme === "dark" ? (
+                <SunIcon className="h-6 w-6 text-black dark:text-gray-200" />
+              ) : (
+                <MoonIcon className="h-6 w-6 text-black dark:text-gray-200" />
+              )}
             </Button>
           </div>
         </div>

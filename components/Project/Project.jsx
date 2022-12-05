@@ -12,14 +12,14 @@ const Project = ({ data }) => {
     >
       <NextLink
         href={`/project/${data.slug.current}`}
-        className="group relative block h-full w-full justify-between border-2 border-black p-8"
+        className="group relative block h-full w-full justify-between border-2 border-black p-8 dark:border-gray-200"
       >
         <h3 className="text-2xl font-bold">{data.title}</h3>
-        <p className="mt-2 text-gray-600">{data.date}</p>
-        <p className="my-2 text-gray-600">
+        <p className="mt-2 text-gray-600 dark:text-gray-200">{data.date}</p>
+        <p className="my-2 text-gray-600 dark:text-gray-200">
           {getLocalizedText(data.description)}
         </p>
-        <div className="absolute -left-4 -top-4 -z-10 h-full w-full bg-gradient-to-br from-transparent to-sky-200 transition-colors group-hover:bg-blue-200" />
+        <div className="absolute -left-4 -top-4 -z-10 h-full w-full bg-gradient-to-br from-transparent to-sky-200 transition-colors group-hover:bg-blue-200 dark:to-sky-600 dark:group-hover:bg-blue-600" />
       </NextLink>
     </motion.div>
   );

@@ -35,7 +35,7 @@ const Footer = () => {
 
   return (
     <footer className="px-4">
-      <div className="mx-auto max-w-4xl border-t border-gray-300 py-16 ">
+      <div className="mx-auto max-w-4xl border-t border-gray-300 py-16 dark:border-gray-600 ">
         <div className="mx-auto mb-8 max-w-4xl text-gray-400">
           PG x INDYWICH x TNKLBL x H16
         </div>
@@ -44,7 +44,7 @@ const Footer = () => {
           {links.map((item, index) => {
             return (
               <div className="flex flex-col space-y-8" key={index}>
-                <h2 className="text-xl font-bold uppercase tracking-widest text-black">
+                <h2 className="text-xl font-bold uppercase tracking-widest text-black dark:text-gray-200">
                   {item.name}
                 </h2>
                 <ul className="list-decorator flex flex-col space-y-4">

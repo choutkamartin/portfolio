@@ -13,26 +13,26 @@ import { imageBuilder, urlForImage } from "lib/sanity";
 const Page = ({ data }) => {
   const { education, work, model } = data;
   const { t } = useTranslation("about");
-  
+
   return (
     <>
       <div className="flex flex-wrap items-center gap-8 pb-36 sm:flex-nowrap lg:gap-32">
         <div className="shrink">
           <h1 className="text-6xl font-bold">O mně</h1>
           <p
-            className="mt-2 text-lg text-gray-600"
+            className="mt-2 text-lg text-gray-600 dark:text-gray-200"
             dangerouslySetInnerHTML={{
               __html: t("about", { interpolation: { escapeValue: false } }),
             }}
           />
-          <p className="mt-8 text-lg text-gray-600">
+          <p className="mt-8 text-lg text-gray-600 dark:text-gray-200">
             Pracuji v ČSOB, na pozici web content managera. Spravuji CEB -
             Company Electronic Banking. Jedná se o internetové bankovnictví pro
             firmy a korporace. Mojí náplní je správa portálu, tvorba/úprava
             webového obsahu, publikování kampaní a tvorba nových PDF formulářů
             či úprava již stávajících - v JavaScriptu.
           </p>
-          <p className="mt-8 text-lg text-gray-600">
+          <p className="mt-8 text-lg text-gray-600 dark:text-gray-200">
             Tvorbu webů, aplikací či programů jsem se naučil kompletně sám -
             baví mě to a tak se v tom snažím zdokonalovat. Ovládám plynně
             technologie a jazyky, které jsou vypsány o kousek dole.
@@ -49,7 +49,7 @@ const Page = ({ data }) => {
               <div className="absolute h-0.5 w-20 origin-top-left -translate-x-0.5 -rotate-90 bg-gray-600"></div>
             </div> */}
           </div>
-          <div className="absolute top-1/4 left-1/4 -z-10 h-40 w-40 bg-sky-400"></div>
+          <div className="absolute top-1/4 left-1/4 -z-10 h-40 w-40 bg-sky-400 dark:bg-sky-600"></div>
         </div>
       </div>
       <hr />

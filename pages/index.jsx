@@ -26,12 +26,14 @@ const Page = ({ data }) => {
         <div className="shrink">
           <h1 className="text-6xl font-bold">{t("introduction")}</h1>
           <p
-            className="mt-2 text-xl text-gray-600"
+            className="mt-2 text-xl text-gray-600 dark:text-gray-200"
             dangerouslySetInnerHTML={{
               __html: t("about", { interpolation: { escapeValue: false } }),
             }}
           />
-          <p className="mt-8 text-lg text-gray-600">{t("description")}</p>
+          <p className="mt-8 text-lg text-gray-600 dark:text-gray-200">
+            {t("description")}
+          </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button
               as="link"
@@ -60,10 +62,10 @@ const Page = ({ data }) => {
               <div className="absolute h-0.5 w-20 origin-top-left -translate-x-0.5 -rotate-90 bg-gray-600"></div>
             </div> */}
           </div>
-          <div className="absolute top-1/4 left-1/4 -z-10 h-40 w-40 bg-sky-400"></div>
+          <div className="absolute top-1/4 left-1/4 -z-10 h-40 w-40 bg-sky-400 dark:bg-sky-600"></div>
         </div>
       </div>
-      <hr />
+      <hr className="dark:border-gray-600" />
       <div className="py-16">
         <h2 className="mb-4 text-4xl font-bold">{t("projects")}</h2>
         <Projects data={projects} />

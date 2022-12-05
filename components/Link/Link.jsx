@@ -20,7 +20,9 @@ export default function Link({
         <span
           className={joinClassNames(
             "link link-underline link-underline-yellow",
-            active ? "font-medium text-black" : "font-normal text-gray-600"
+            active
+              ? "font-medium text-black dark:text-white"
+              : "font-normal text-gray-600 dark:text-gray-200"
           )}
         >
           {icon && <FontAwesomeIcon icon={icon} />}

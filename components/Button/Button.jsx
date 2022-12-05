@@ -24,7 +24,7 @@ export default function Button({
             STYLE[style][0]
           )}
         ></span>
-        <span className="absolute inset-0 h-full w-full border-2 border-black"></span>
+        <span className="absolute inset-0 h-full w-full border-2 border-black dark:border-gray-200"></span>
         <span className="relative">
           {spin && <FontAwesomeIcon icon={faSpinner} spin />}
           {icon && <FontAwesomeIcon icon={icon} />}

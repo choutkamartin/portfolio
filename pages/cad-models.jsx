@@ -17,7 +17,7 @@ const Page = ({ data }) => {
   return (
     <>
       <h2 className="mb-8 text-4xl font-bold">CAD modely</h2>
-      <p className="my-8 text-lg text-gray-600">
+      <p className="my-8 text-lg text-gray-600 dark:text-gray-200">
         Strojírenské součásti a jejich modely které jsem vytvořil při studiu na
         střední školy. Všechny obrázky odkazují na web GrabCAD, odkud se dají
         modely stáhnout.
@@ -31,10 +31,10 @@ const Page = ({ data }) => {
                 fill
                 className="object-cover"
               />
-              <div className="absolute bottom-0 h-0 w-full overflow-hidden bg-sky-400 bg-opacity-50 backdrop-blur-lg transition-all group-hover:h-full">
+              <div className="absolute bottom-0 h-0 w-full overflow-hidden bg-sky-400 bg-opacity-50 backdrop-blur-lg transition-all group-hover:h-full dark:bg-sky-600 dark:bg-opacity-50">
                 <div className="p-6">
                   <p className="mb-4 text-2xl font-bold">{item.title}</p>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-200">
                     {getLocalizedText(item.description)}
                   </p>
                 </div>
