@@ -9,6 +9,7 @@ import { Raleway } from "@next/font/google";
 const inter = Raleway({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
+  display: "swap"
 });
 
 function MyApp({ Component, pageProps, router }) {
